@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息查询</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>学生信息查询</h1>
+<form id="studentForm">
+    <label for="studentId">输入学生ID：</label>
+    <input type="text" id="studentId" name="studentId" required>
+    <button type="submit">查询</button>
+</form>
+
+<h2>查询结果：</h2>
+<div id="studentInfo"></div>
+
+<script>
+    $(document).ready(function() {
+        $('#studentForm').submit(function(e) {
+            e.preventDefault(); // 阻止表单默认提交行为
+
+            var studentId = $('#studentId').val();
+            $.post('student', { studentId: studentId }, function(data) {
+                $('#studentInfo').html(data);
+            });
+        });
+    });
+</script>
+</body>
+</html>
